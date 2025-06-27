@@ -1,6 +1,5 @@
-
 import { useState } from "react";
-import { Shield, Users, Activity, TrendingUp, AlertTriangle, CheckCircle } from "lucide-react";
+import { Shield, Users, Activity, TrendingUp, AlertTriangle, CheckCircle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -32,10 +31,25 @@ const Index = () => {
                 <p className="text-sm text-gray-600">Cybersecurity Trust Platform</p>
               </div>
             </div>
-            <Badge variant="secondary" className="bg-green-100 text-green-800">
-              <CheckCircle className="h-3 w-3 mr-1" />
-              All Systems Secure
-            </Badge>
+            <div className="flex items-center space-x-4">
+              <Badge variant="secondary" className="bg-green-100 text-green-800">
+                <CheckCircle className="h-3 w-3 mr-1" />
+                All Systems Secure
+              </Badge>
+              <Button 
+                variant="outline"
+                onClick={() => navigate('/login')}
+              >
+                Sign In
+              </Button>
+              <Button 
+                onClick={() => navigate('/shop')}
+                className="bg-blue-600 hover:bg-blue-700"
+              >
+                Start Shopping
+                <ArrowRight className="h-4 w-4 ml-2" />
+              </Button>
+            </div>
           </div>
         </div>
       </header>
@@ -85,6 +99,34 @@ const Index = () => {
               <div className="text-sm text-gray-600">Protected Users</div>
             </CardContent>
           </Card>
+        </div>
+
+        {/* Shopping CTA */}
+        <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 mb-12 text-white text-center">
+          <h3 className="text-2xl font-bold mb-4">Experience Secure Shopping</h3>
+          <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
+            Shop with confidence knowing every transaction is protected by AI-powered security, 
+            blockchain verification, and real-time fraud detection.
+          </p>
+          <div className="flex justify-center space-x-4">
+            <Button 
+              size="lg"
+              variant="secondary"
+              onClick={() => navigate('/shop')}
+              className="bg-white text-blue-600 hover:bg-blue-50"
+            >
+              <Shield className="h-5 w-5 mr-2" />
+              Start Secure Shopping
+            </Button>
+            <Button 
+              size="lg"
+              variant="outline"
+              onClick={() => navigate('/login')}
+              className="border-white text-white hover:bg-white hover:text-blue-600"
+            >
+              Sign In to Account
+            </Button>
+          </div>
         </div>
 
         {/* Role Selection */}

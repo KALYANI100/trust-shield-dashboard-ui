@@ -1,6 +1,5 @@
-
 import { useState, useEffect } from "react";
-import { Shield, CheckCircle, AlertTriangle, CreditCard, History, FileText, ArrowLeft, Eye, Lock } from "lucide-react";
+import { Shield, CheckCircle, AlertTriangle, CreditCard, History, FileText, ArrowLeft, Eye, Lock, Settings, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -57,10 +56,19 @@ const CustomerDashboard = () => {
                 </div>
               </div>
             </div>
-            <Badge variant="secondary" className="bg-green-100 text-green-800">
-              <CheckCircle className="h-3 w-3 mr-1" />
-              Account Secure
-            </Badge>
+            <div className="flex items-center space-x-4">
+              <Badge variant="secondary" className="bg-green-100 text-green-800">
+                <CheckCircle className="h-3 w-3 mr-1" />
+                Account Secure
+              </Badge>
+              <Button 
+                variant="outline"
+                onClick={() => navigate('/shop')}
+              >
+                <ShoppingCart className="h-4 w-4 mr-2" />
+                Continue Shopping
+              </Button>
+            </div>
           </div>
         </div>
       </header>
@@ -120,7 +128,11 @@ const CustomerDashboard = () => {
               <CardTitle>Quick Actions</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
-              <Button className="w-full justify-start" variant="outline">
+              <Button 
+                className="w-full justify-start" 
+                variant="outline"
+                onClick={() => navigate('/checkout')}
+              >
                 <CreditCard className="h-4 w-4 mr-2" />
                 Secure Checkout
               </Button>
@@ -128,9 +140,21 @@ const CustomerDashboard = () => {
                 <FileText className="h-4 w-4 mr-2" />
                 File Dispute
               </Button>
-              <Button className="w-full justify-start" variant="outline">
+              <Button 
+                className="w-full justify-start" 
+                variant="outline"
+                onClick={() => navigate('/account-security')}
+              >
                 <Lock className="h-4 w-4 mr-2" />
-                Update Security
+                Account Security
+              </Button>
+              <Button 
+                className="w-full justify-start" 
+                variant="outline"
+                onClick={() => navigate('/shop')}
+              >
+                <ShoppingCart className="h-4 w-4 mr-2" />
+                Shop Securely
               </Button>
             </CardContent>
           </Card>

@@ -1,6 +1,5 @@
-
 import { useState, useEffect } from "react";
-import { AlertTriangle, Shield, Activity, Users, TrendingUp, Bot, Eye, Settings, ArrowLeft, Zap } from "lucide-react";
+import { AlertTriangle, Shield, Activity, Users, TrendingUp, Bot, Eye, Settings, ArrowLeft, Zap, CreditCard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -94,6 +93,22 @@ const AdminDashboard = () => {
                 <AlertTriangle className="h-3 w-3 mr-1" />
                 {systemStats.activeThreats} Active Threats
               </Badge>
+              <Button 
+                variant="outline" 
+                className="border-gray-600 text-white hover:bg-gray-700"
+                onClick={() => navigate('/fraud-review')}
+              >
+                <AlertTriangle className="h-4 w-4 mr-2" />
+                Fraud Review
+              </Button>
+              <Button 
+                variant="outline" 
+                className="border-gray-600 text-white hover:bg-gray-700"
+                onClick={() => navigate('/payment-security')}
+              >
+                <CreditCard className="h-4 w-4 mr-2" />
+                Payment Config
+              </Button>
               <Button variant="outline" className="border-gray-600 text-white hover:bg-gray-700">
                 <Settings className="h-4 w-4 mr-2" />
                 Settings
