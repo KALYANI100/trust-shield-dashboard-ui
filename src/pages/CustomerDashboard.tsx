@@ -52,7 +52,7 @@ const CustomerDashboard = () => {
                 <Shield className="h-8 w-8 text-blue-600" />
                 <div>
                   <h1 className="text-xl font-bold text-gray-900">Customer Security Portal</h1>
-                  <p className="text-sm text-gray-600">Welcome back, John Doe</p>
+                  <p className="text-sm text-gray-600">Welcome back</p>
                 </div>
               </div>
             </div>
@@ -136,7 +136,7 @@ const CustomerDashboard = () => {
                 <CreditCard className="h-4 w-4 mr-2" />
                 Secure Checkout
               </Button>
-              <Button className="w-full justify-start" variant="outline">
+              <Button className="w-full justify-start" variant="outline" onClick={()=>navigate('/dispute')}>
                 <FileText className="h-4 w-4 mr-2" />
                 File Dispute
               </Button>
@@ -182,7 +182,7 @@ const CustomerDashboard = () => {
                 <Button size="sm" variant="outline" onClick={handleResolveAlert}>
                   That was me
                 </Button>
-                <Button size="sm" className="bg-yellow-600 hover:bg-yellow-700">
+                <Button size="sm" className="bg-yellow-600 hover:bg-yellow-700" onClick={()=>navigate('/secure')}>
                   Secure Account
                 </Button>
               </div>

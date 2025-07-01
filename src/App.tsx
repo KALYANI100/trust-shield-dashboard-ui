@@ -15,6 +15,8 @@ import FraudReview from "./pages/FraudReview";
 import PaymentSecurity from "./pages/PaymentSecurity";
 import NotFound from "./pages/NotFound";
 import Register from "./pages/Register";
+import Dispute from "./pages/Dispute";
+import Security from "./pages/Security";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +37,8 @@ const App = () => (
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path="/fraud-review" element={<FraudReview />} />
           <Route path="/payment-security" element={<PaymentSecurity />} />
+          <Route path="/dispute" element={<Dispute />} />
+          <Route path="/secure" element={<Security />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
