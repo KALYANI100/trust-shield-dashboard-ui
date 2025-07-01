@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
+import walmart from "../Images/wlogo.png"
 import { toast } from "sonner";
 
 const Shop = () => {
@@ -34,10 +35,14 @@ const Shop = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <Shield className="h-8 w-8 text-blue-600" />
+              <img 
+                src={walmart} 
+                alt="Walmart Logo" 
+                className="h-8 w-8 object-contain" 
+              />
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">Walmart</h1>
-                <p className="text-sm text-gray-600">Secure Shopping</p>
+                {/* <p className="text-sm text-gray-600">Secure Shopping</p> */}
               </div>
             </div>
             <div className="flex items-center space-x-4">

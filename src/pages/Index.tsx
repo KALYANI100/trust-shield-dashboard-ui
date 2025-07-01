@@ -127,7 +127,7 @@ const Index = () => {
               size="lg"
               variant="outline"
               onClick={() => navigate('/login')}
-              className="border-white text-white hover:bg-white hover:text-blue-600"
+              className="bg-white text-blue-600 hover:bg-blue-50"
             >
               Sign In to Account
             </Button>

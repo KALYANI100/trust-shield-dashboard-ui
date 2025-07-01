@@ -17,6 +17,8 @@ import NotFound from "./pages/NotFound";
 import Register from "./pages/Register";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { AuthProvider } from "./context/AuthContext";
+import Dispute from "./pages/Dispute";
+import Security from "./pages/Security";
 
 const queryClient = new QueryClient();
 const clientId ="42747422440-mqf33ao1m9836i3m0lm1tes6q2josaim.apps.googleusercontent.com";
@@ -43,6 +45,8 @@ const App = () => (
               <Route path="/admin-dashboard" element={<AdminDashboard />} />
               <Route path="/fraud-review" element={<FraudReview />} />
               <Route path="/payment-security" element={<PaymentSecurity />} />
+              <Route path="/dispute" element={<Dispute />} />
+          <Route path="/secure" element={<Security />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </TooltipProvider>
