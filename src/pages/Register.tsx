@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Shield, Eye, EyeOff, UserPlus, Smartphone } from "lucide-react";
+import { Shield, Eye, EyeOff, UserPlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -14,11 +14,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
+import ReCAPTCHA from "react-google-recaptcha";
+import { useAuth } from "@/context/AuthContext";
 
 const Register = () => {
   const navigate = useNavigate();
+  const { register, googleLogin, isLoading } = useAuth();
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [recaptchaValue, setRecaptchaValue] = useState<string | null>(null);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -26,25 +33,38 @@ const Register = () => {
     confirmPassword: "",
     role: "customer",
   });
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
 
-    // Validate passwords match
-    if (formData.password !== formData.confirmPassword) {
-      toast.error("Passwords do not match");
-      setIsLoading(false);
+    if (!recaptchaValue) {
+      toast.error("Please complete the reCAPTCHA verification");
       return;
     }
 
-    // Simulate registration process
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    toast.success("Registration successful! Welcome to Walmart Secure Shopping");
-    navigate('/shop');
-    setIsLoading(false);
+    if (formData.password !== formData.confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+
+    await register({
+      name: formData.name,
+      email: formData.email,
+      password: formData.password,
+      role: formData.role,
+    });
+  };
+
+  const handleGoogleSuccess = async (credentialResponse: CredentialResponse) => {
+    if (credentialResponse.credential) {
+      await googleLogin(credentialResponse.credential);
+    } else {
+      toast.error("Google credential not received");
+    }
+  };
+
+  const handleGoogleError = () => {
+    toast.error("Google authentication failed. Please try again.");
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -82,6 +102,26 @@ const Register = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
+            <div className="flex justify-center mb-4">
+              <GoogleLogin
+                onSuccess={handleGoogleSuccess}
+                onError={handleGoogleError}
+                // useOneTap
+                text="signup_with"
+                shape="rectangular"
+                size="large"
+              />
+            </div>
+
+            <div className="relative mb-6">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-white px-2 text-gray-500">Or register with email</span>
+              </div>
+            </div>
+
             <form onSubmit={handleRegister} className="space-y-4">
               <div>
                 <Label htmlFor="name">Full Name</Label>
@@ -119,8 +159,8 @@ const Register = () => {
                     <SelectValue placeholder="Select account type" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="customer">Customer</SelectItem>
-                    <SelectItem value="vendor">Vendor</SelectItem>
+                    <SelectItem value="user">User</SelectItem>
+                    {/* <SelectItem value="vendor">Vendor</SelectItem> */}
                     <SelectItem value="admin">Administrator</SelectItem>
                   </SelectContent>
                 </Select>
@@ -176,10 +216,17 @@ const Register = () => {
                 </div>
               </div>
 
+              <div className="flex justify-center">
+                <ReCAPTCHA
+                  sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                  onChange={setRecaptchaValue}
+                />
+              </div>
+
               <Button 
                 type="submit" 
                 className="w-full bg-blue-600 hover:bg-blue-700"
-                disabled={isLoading}
+                disabled={isLoading || !recaptchaValue}
               >
                 {isLoading ? "Creating Account..." : "Create Account"}
               </Button>
@@ -203,8 +250,6 @@ const Register = () => {
                 <UserPlus className="h-4 w-4 mr-2" />
                 Sign In Instead
               </Button>
-
-              
             </div>
           </CardContent>
         </Card>
