@@ -124,21 +124,14 @@ const Login = () => {
                 Face ID / Touch ID
               </Button>
 
-              <Button
-                variant="outline"
-                className="w-full"
-                onClick={() => navigate('/shop')}
-              >
-                <Smartphone className="h-4 w-4 mr-2" />
-                Continue as Guest
-              </Button>
+              
             </div>
           </CardContent>
         </Card>
 
         <div className="text-center text-sm text-gray-600">
           Don't have an account?{" "}
-          <Button variant="link" className="p-0 h-auto font-normal">
+          <Button variant="link" className="p-0 h-auto font-normal" onClick={()=>navigate('/signup')}>
             Sign up
           </Button>
         </div>

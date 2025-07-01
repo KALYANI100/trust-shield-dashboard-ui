@@ -14,6 +14,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import FraudReview from "./pages/FraudReview";
 import PaymentSecurity from "./pages/PaymentSecurity";
 import NotFound from "./pages/NotFound";
+import Register from "./pages/Register";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Register/>} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/customer-dashboard" element={<CustomerDashboard />} />
