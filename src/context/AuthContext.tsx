@@ -301,7 +301,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setIsAuthenticated(true);
       startLogoutTimer();
       toast.success('Login successful!');
-      navigate('/shop');
+      if (user.role === 'admin') {
+        navigate('/admin-dashboard');
+      } else {
+        navigate('/shop');
+      }
+      // navigate('/shop');
     } catch (error: any) {
       toast.error(error.response?.data?.message || 'Login failed. Please check your credentials.');
       throw error;
@@ -327,7 +332,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setIsAuthenticated(true);
       startLogoutTimer();
       toast.success('Registration successful!');
-      navigate('/shop');
+      if (user.role === 'admin') {
+        navigate('/admin-dashboard');
+      } else {
+        navigate('/shop');
+      }
+      // navigate('/shop');
     } catch (error: any) {
       if (error.response?.data?.errors) {
         Object.entries(error.response.data.errors).forEach(([field, messages]) => {
@@ -354,7 +364,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setIsAuthenticated(true);
       startLogoutTimer();
       toast.success('Google login successful!');
-      navigate('/shop');
+      if (user.role === 'admin') {
+        navigate('/admin-dashboard');
+      } else {
+        navigate('/shop');
+      }
+      // navigate('/shop');
     } catch (error: any) {
       toast.error(error.response?.data?.message || 'Google login failed. Please try again.');
       throw error;
