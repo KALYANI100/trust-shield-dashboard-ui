@@ -64,9 +64,9 @@ const App = () => (
   <Route
     path="/shop"
     element={
-      <RoleBasedRoute allowedRoles={["admin","user"]}>
+      // <RoleBasedRoute allowedRoles={["admin","user"]}>
         <Shop />
-      </RoleBasedRoute>
+      // </RoleBasedRoute>
     }
   />
   <Route
