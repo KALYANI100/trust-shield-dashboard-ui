@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import walmartLogo from "../Images/wlogo.png";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -39,10 +40,14 @@ const Login = () => {
         {/* Header */}
         <div className="text-center">
           <div className="flex items-center justify-center space-x-3 mb-4">
-            <Shield className="h-10 w-10 text-blue-600" />
+             <img 
+                src={walmartLogo} 
+                alt="Walmart Logo" 
+                className="h-8 w-8 object-contain" 
+              />
             <div>
               <h1 className="text-3xl font-bold text-gray-900">Walmart</h1>
-              <p className="text-sm text-gray-600">Secure Shopping Platform</p>
+              {/* <p className="text-sm text-gray-600">Secure Shopping Platform</p> */}
             </div>
           </div>
           <Badge variant="secondary" className="bg-green-100 text-green-800">
