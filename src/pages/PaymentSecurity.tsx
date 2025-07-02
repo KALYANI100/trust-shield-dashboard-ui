@@ -11,6 +11,8 @@ import { toast } from "sonner";
 
 const PaymentSecurity = () => {
   const navigate = useNavigate();
+  const [selectedPayment, setSelectedPayment] = useState<any | null>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
   const [securitySettings, setSecuritySettings] = useState({
     blockHighRiskCountries: true,
     enableVelocityChecks: true,
@@ -55,6 +57,12 @@ const PaymentSecurity = () => {
       default: return 'bg-gray-100 text-gray-800';
     }
   };
+
+  const openSettingsDialog = (payment: any) => {
+  setSelectedPayment(payment);
+  setDialogOpen(true);
+};
+
 
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900">

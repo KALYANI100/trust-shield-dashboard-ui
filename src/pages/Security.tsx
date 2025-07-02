@@ -47,6 +47,7 @@ const Security = () => {
           </CardHeader>
 
           <CardContent className="space-y-6">
+  
             <div className="flex items-center justify-between p-4 border rounded-lg">
               <div className="flex items-center space-x-2">
                 <Lock className="h-4 w-4 text-gray-600" />

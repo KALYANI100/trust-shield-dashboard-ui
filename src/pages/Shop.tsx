@@ -348,7 +348,13 @@
 import { useState } from "react";
 import { Shield, ShoppingCart, Star, Plus, Lock, Truck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
 import walmart from "../Images/wlogo.png";
@@ -489,8 +495,11 @@ const Shop = () => {
                 <h1 className="text-2xl font-bold text-gray-900">Walmart</h1>
               </div>
             </div>
-            <div className="flex items-center space-x-4">
-              <Badge variant="secondary" className="bg-green-100 text-green-800">
+            <div className="flex flex-col sm:flex-row items-center gap-3">
+              <Badge
+                variant="secondary"
+                className="bg-green-100 text-green-800"
+              >
                 <Lock className="h-3 w-3 mr-1" />
                 SSL Secured
               </Badge>
@@ -533,13 +542,14 @@ const Shop = () => {
         </div>
       </header>
 
+      {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-2">Featured Products</h2>
           <p className="text-gray-600">Shop with confidence - every purchase is protected by our AI security system</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {products.map((product) => (
             <Card key={product.id} className="hover:shadow-lg transition-shadow duration-300 flex flex-col h-full">
               <div className="relative h-60 w-full bg-gray-50 flex items-center justify-center p-4">

@@ -19,6 +19,8 @@ import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { AuthProvider } from "./context/AuthContext";
 import Dispute from "./pages/Dispute";
 import Security from "./pages/Security";
+//new route added
+import SettingsPage from "./pages/SettingPage";
 
 
 import PrivateRoute from "./components/ui/privateRoute";
@@ -51,13 +53,15 @@ const App = () => (
               <Route path="/fraud-review" element={<FraudReview />} />
               <Route path="/payment-security" element={<PaymentSecurity />} />
               <Route path="/dispute" element={<Dispute />} />
-          <Route path="/secure" element={<Security />} />
+              <Route path="/secure" element={<Security />} />
+              <Route path="/settings" element={<SettingsPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes> */}
             <Routes>
   {/* ✅ Public Routes */}
   <Route path="/" element={<Index />} />
   <Route path="/login" element={<Login />} />
+
   <Route path="/signup" element={<Register />} />
 
   {/* 🔒 Admin-Only Private Routes */}
@@ -125,6 +129,11 @@ const App = () => (
       </RoleBasedRoute>
     }
   />
+  <Route path="/settings" element={
+    <RoleBasedRoute allowedRoles={["admin"]}>
+      <SettingsPage />
+    </RoleBasedRoute>
+  } />
   <Route
     path="/secure"
     element={
