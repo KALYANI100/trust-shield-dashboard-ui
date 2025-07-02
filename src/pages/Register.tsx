@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { Shield, Eye, EyeOff, UserPlus } from "lucide-react";
+import { Eye, EyeOff, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -77,43 +76,53 @@ const Register = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-yellow-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-md space-y-6">
+      <div className="w-full max-w-md">
         {/* Header */}
-        <div className="text-center">
-          <div className="flex items-center justify-center space-x-3 mb-4">
-            <Shield className="h-10 w-10 text-blue-600" />
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">Walmart</h1>
-              <p className="text-sm text-gray-600">Secure Shopping Platform</p>
+        <div className="text-center mb-6">
+          <div className="flex flex-col items-center justify-center space-y-2 mb-4">
+            <div className="flex items-center space-x-2">
+              <img 
+                src="/walmart-icon.ico" 
+                alt="Walmart Logo"
+                className="h-8 w-8 sm:h-10 sm:w-10"
+              />
+              <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">Walmart</h1>
             </div>
+            <p className="text-sm text-gray-600">Secure Shopping Platform</p>
           </div>
-          <Badge variant="secondary" className="bg-green-100 text-green-800">
-            <Shield className="h-3 w-3 mr-1" />
+          <Badge variant="secondary" className="bg-green-100 text-green-800 text-xs sm:text-sm">
+            <img 
+              src="/walmart-icon.ico" 
+              alt="Security Badge"
+              className="h-3 w-3 mr-1"
+            />
             Bank-Level Security
           </Badge>
         </div>
 
         {/* Registration Form */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Create Account</CardTitle>
-            <CardDescription>
+        <Card className="shadow-lg">
+          <CardHeader className="space-y-1">
+            <CardTitle className="text-xl sm:text-2xl">Create Account</CardTitle>
+            <CardDescription className="text-sm sm:text-base">
               Join our secure Walmart shopping platform
             </CardDescription>
           </CardHeader>
-          <CardContent>
-            <div className="flex justify-center mb-4">
-              <GoogleLogin
-                onSuccess={handleGoogleSuccess}
-                onError={handleGoogleError}
-                // useOneTap
-                text="signup_with"
-                shape="rectangular"
-                size="large"
-              />
+          <CardContent className="space-y-4">
+            <div className="flex justify-center w-full">
+              <div className="w-full">
+                <GoogleLogin
+                  onSuccess={handleGoogleSuccess}
+                  onError={handleGoogleError}
+                  text="signup_with"
+                  shape="rectangular"
+                  size="medium"
+                  width="100%"
+                />
+              </div>
             </div>
 
-            <div className="relative mb-6">
+            <div className="relative my-4">
               <div className="absolute inset-0 flex items-center">
                 <span className="w-full border-t" />
               </div>
@@ -123,60 +132,72 @@ const Register = () => {
             </div>
 
             <form onSubmit={handleRegister} className="space-y-4">
-              <div>
-                <Label htmlFor="name">Full Name</Label>
+              <div className="space-y-1">
                 <Input
                   id="name"
                   type="text"
                   value={formData.name}
                   onChange={handleInputChange}
-                  placeholder="John Doe"
+                  placeholder="Full name"
                   required
+                  className="h-10 sm:h-11 text-sm sm:text-base"
                 />
               </div>
 
-              <div>
-                <Label htmlFor="email">Email</Label>
+              <div className="space-y-1">
                 <Input
                   id="email"
                   type="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  placeholder="your@email.com"
+                  placeholder="Email address"
                   required
+                  className="h-10 sm:h-11 text-sm sm:text-base"
                 />
               </div>
 
-              <div>
-                <Label htmlFor="role">Account Type</Label>
-                <Select
+              <div className="space-y-1">
+                {/* <Select
                   value={formData.role}
                   onValueChange={(value) => 
                     setFormData(prev => ({ ...prev, role: value }))
                   }
                 >
-                  <SelectTrigger>
+                  <SelectTrigger className="h-10 sm:h-11 text-sm sm:text-base">
                     <SelectValue placeholder="Select account type" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="user">User</SelectItem>
-                    {/* <SelectItem value="vendor">Vendor</SelectItem> */}
-                    <SelectItem value="admin">Administrator</SelectItem>
+                    <SelectItem value="user" className="text-sm sm:text-base">User</SelectItem>
+                    <SelectItem value="admin" className="text-sm sm:text-base">Administrator</SelectItem>
                   </SelectContent>
-                </Select>
+                </Select> */}
+                <Select
+  value={formData.role}
+  onValueChange={(value) => setFormData(prev => ({ ...prev, role: value }))}
+>
+  <SelectTrigger className="h-10 sm:h-11 text-sm sm:text-base">
+    <SelectValue placeholder="Select account type">
+      {formData.role!=='' && "Select account type"}
+    </SelectValue>
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="user">User</SelectItem>
+    <SelectItem value="admin">Administrator</SelectItem>
+  </SelectContent>
+</Select>
               </div>
               
-              <div>
-                <Label htmlFor="password">Password</Label>
+              <div className="space-y-1">
                 <div className="relative">
                   <Input
                     id="password"
                     type={showPassword ? "text" : "password"}
                     value={formData.password}
                     onChange={handleInputChange}
-                    placeholder="Create a password"
+                    placeholder="Create password (min 8 characters)"
                     required
                     minLength={8}
+                    className="h-10 sm:h-11 text-sm sm:text-base pr-10"
                   />
                   <Button
                     type="button"
@@ -185,16 +206,16 @@ const Register = () => {
                     className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
                     onClick={() => setShowPassword(!showPassword)}
                   >
-                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    {showPassword ? (
+                      <EyeOff className="h-4 w-4 text-gray-500" />
+                    ) : (
+                      <Eye className="h-4 w-4 text-gray-500" />
+                    )}
                   </Button>
                 </div>
-                <p className="text-xs text-gray-500 mt-1">
-                  Must be at least 8 characters
-                </p>
               </div>
 
-              <div>
-                <Label htmlFor="confirmPassword">Confirm Password</Label>
+              <div className="space-y-1">
                 <div className="relative">
                   <Input
                     id="confirmPassword"
@@ -203,6 +224,7 @@ const Register = () => {
                     onChange={handleInputChange}
                     placeholder="Confirm your password"
                     required
+                    className="h-10 sm:h-11 text-sm sm:text-base pr-10"
                   />
                   <Button
                     type="button"
@@ -211,12 +233,16 @@ const Register = () => {
                     className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                   >
-                    {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    {showConfirmPassword ? (
+                      <EyeOff className="h-4 w-4 text-gray-500" />
+                    ) : (
+                      <Eye className="h-4 w-4 text-gray-500" />
+                    )}
                   </Button>
                 </div>
               </div>
 
-              <div className="flex justify-center">
+              <div className="flex justify-center w-full transform scale-[0.85] sm:scale-100 origin-center">
                 <ReCAPTCHA
                   sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
                   onChange={setRecaptchaValue}
@@ -225,14 +251,14 @@ const Register = () => {
 
               <Button 
                 type="submit" 
-                className="w-full bg-blue-600 hover:bg-blue-700"
+                className="w-full bg-blue-600 hover:bg-blue-700 h-10 sm:h-11 text-sm sm:text-base"
                 disabled={isLoading || !recaptchaValue}
               >
                 {isLoading ? "Creating Account..." : "Create Account"}
               </Button>
             </form>
 
-            <div className="mt-6 space-y-3">
+            <div className="mt-6 space-y-4">
               <div className="relative">
                 <div className="absolute inset-0 flex items-center">
                   <span className="w-full border-t" />
@@ -244,23 +270,29 @@ const Register = () => {
 
               <Button
                 variant="outline"
-                className="w-full"
+                className="w-full h-10 sm:h-11"
                 onClick={() => navigate('/login')}
               >
-                <UserPlus className="h-4 w-4 mr-2" />
-                Sign In Instead
+                <LogIn className="h-4 w-4 mr-2" />
+                <span className="text-sm sm:text-base">Sign In Instead</span>
               </Button>
             </div>
           </CardContent>
         </Card>
 
-        <div className="text-center text-sm text-gray-600">
+        <div className="text-center text-xs sm:text-sm text-gray-600 mt-4">
           By registering, you agree to our{" "}
-          <Button variant="link" className="p-0 h-auto font-normal">
+          <Button 
+            variant="link" 
+            className="p-0 h-auto font-normal text-xs sm:text-sm text-blue-600 hover:text-blue-800"
+          >
             Terms of Service
           </Button>{" "}
           and{" "}
-          <Button variant="link" className="p-0 h-auto font-normal">
+          <Button 
+            variant="link" 
+            className="p-0 h-auto font-normal text-xs sm:text-sm text-blue-600 hover:text-blue-800"
+          >
             Privacy Policy
           </Button>
         </div>
