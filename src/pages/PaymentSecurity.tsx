@@ -235,9 +235,23 @@ import { Switch } from "@/components/ui/switch";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
+
 
 const PaymentSecurity = () => {
   const navigate = useNavigate();
+  const [selectedPayment, setSelectedPayment] = useState<any | null>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
   const [securitySettings, setSecuritySettings] = useState({
     aiFraudDetection: true,
     blockHighRiskCountries: true,
@@ -302,6 +316,12 @@ const PaymentSecurity = () => {
       default: return <BarChart2 className="h-4 w-4 text-gray-500" />;
     }
   };
+
+  const openSettingsDialog = (payment: any) => {
+  setSelectedPayment(payment);
+  setDialogOpen(true);
+};
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950 text-gray-900 dark:text-gray-100">
@@ -530,7 +550,12 @@ const PaymentSecurity = () => {
                         >
                           {method.enabled ? 'Active' : 'Inactive'}
                         </Badge>
-                        <Button size="sm" variant="outline" className="text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600"
+                          onClick={() => openSettingsDialog(method)}
+                        >
                           <Settings className="h-4 w-4 mr-1.5" />
                           Settings
                         </Button>
@@ -542,6 +567,75 @@ const PaymentSecurity = () => {
             </Card>
           </TabsContent>
         </Tabs>
+
+        <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+          <DialogContent className="max-w-md">
+            <DialogHeader>
+              <DialogTitle className="text-blue-600">Edit Payment Settings</DialogTitle>
+              <DialogDescription>
+                Customize security options for {selectedPayment?.name}
+              </DialogDescription>
+            </DialogHeader>
+
+            {selectedPayment && (
+              <div className="space-y-4 mt-4">
+                <div>
+                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300 block mb-1">
+                    Daily Limit
+                  </label>
+                  <Input defaultValue={selectedPayment.dailyLimit} />
+                </div>
+
+                <div>
+                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300 block mb-1">
+                    Protections
+                  </label>
+                  <div className="space-y-2">
+                    {["Tokenization", "3D Secure", "Biometric Auth", "Device Binding", "2FA", "Blockchain Verification", "Email Verification"].map((prot) => (
+                      <div key={prot} className="flex items-center space-x-2">
+                        <Checkbox
+                          id={prot}
+                          defaultChecked={selectedPayment.protection.includes(prot)}
+                        />
+                        <label htmlFor={prot} className="text-sm text-gray-700 dark:text-gray-300">
+                          {prot}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between pt-2">
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Status: {selectedPayment.enabled ? "Active" : "Inactive"}
+                  </span>
+                  <Switch
+                    checked={selectedPayment.enabled}
+                    onCheckedChange={(val) => {
+                      setSelectedPayment({ ...selectedPayment, enabled: val });
+                    }}
+                  />
+                </div>
+              </div>
+            )}
+
+            <DialogFooter className="mt-4">
+              <Button variant="outline" onClick={() => setDialogOpen(false)}>
+                Cancel
+              </Button>
+              <Button
+                className="bg-blue-600 hover:bg-blue-700 text-white"
+                onClick={() => {
+                  toast.success("Settings saved successfully");
+                  setDialogOpen(false);
+                }}
+              >
+                Save Changes
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+
       </div>
     </div>
   );

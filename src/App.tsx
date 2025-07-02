@@ -19,6 +19,8 @@ import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { AuthProvider } from "./context/AuthContext";
 import Dispute from "./pages/Dispute";
 import Security from "./pages/Security";
+//new route added
+import SettingsPage from "./pages/SettingPage";
 
 const queryClient = new QueryClient();
 const clientId ="42747422440-mqf33ao1m9836i3m0lm1tes6q2josaim.apps.googleusercontent.com";
@@ -46,7 +48,8 @@ const App = () => (
               <Route path="/fraud-review" element={<FraudReview />} />
               <Route path="/payment-security" element={<PaymentSecurity />} />
               <Route path="/dispute" element={<Dispute />} />
-          <Route path="/secure" element={<Security />} />
+              <Route path="/secure" element={<Security />} />
+              <Route path="/settings" element={<SettingsPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </TooltipProvider>

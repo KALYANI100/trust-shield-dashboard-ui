@@ -20,6 +20,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {Dialog,DialogContent,DialogHeader,DialogTitle,DialogDescription,DialogFooter,DialogTrigger} from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useNavigate } from "react-router-dom";
@@ -28,6 +29,9 @@ import { toast } from "sonner";
 const CustomerDashboard = () => {
   const navigate = useNavigate();
   const [trustScore, setTrustScore] = useState(87);
+  const [selectedTransactionId, setSelectedTransactionId] = useState<number | null>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
+
   const [recentActivity, setRecentActivity] = useState([
     {
       id: 1,
@@ -70,9 +74,15 @@ const CustomerDashboard = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // const handleViewProof = (transactionId: number) => {
+  //   toast.success(`Blockchain verification opened for transaction #${transactionId}`);
+  // };
+
   const handleViewProof = (transactionId: number) => {
-    toast.success(`Blockchain verification opened for transaction #${transactionId}`);
-  };
+  setSelectedTransactionId(transactionId);
+  setDialogOpen(true);
+};
+
 
   const handleResolveAlert = () => {
     toast.success("Fraud alert marked as resolved");
@@ -269,6 +279,51 @@ const CustomerDashboard = () => {
             ))}
           </CardContent>
         </Card>
+
+        <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogContent className="max-w-lg">
+          <DialogHeader>
+            <DialogTitle className="text-blue-600">Blockchain Proof</DialogTitle>
+            <DialogDescription>
+              Verification details for transaction #{selectedTransactionId}
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="mt-4 space-y-3 text-sm text-gray-700">
+            <div className="flex items-center justify-between">
+              <span className="font-medium">Transaction ID</span>
+              <span className="text-gray-600">TXN-{selectedTransactionId}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="font-medium">Hash</span>
+              <span className="truncate max-w-[160px] text-gray-500">0x6a7b2...f0c1</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="font-medium">Timestamp</span>
+              <span className="text-gray-600">2025-07-01 18:23</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="font-medium">Block Number</span>
+              <span className="text-gray-600">#142093</span>
+            </div>
+            <div className="flex items-start justify-between">
+              <span className="font-medium">Details</span>
+              <span className="text-gray-500 text-right">
+                Verified on-chain using zkProof v2.4<br />
+                Network: Ethereum (L2)
+              </span>
+            </div>
+          </div>
+
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setDialogOpen(false)}>Close</Button>
+            <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+              View on Blockchain
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
       </div>
     </div>
   );

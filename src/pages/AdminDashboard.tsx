@@ -166,7 +166,7 @@ const AdminDashboard = () => {
                 <CreditCard className="h-4 w-4 mr-2" />
                 Payment Config
               </Button>
-              <Button variant="outline">
+              <Button variant="outline" onClick={() => navigate("/settings")}>
                 <Settings className="h-4 w-4 mr-2" />
                 Settings
               </Button>
