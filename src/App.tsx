@@ -61,6 +61,7 @@ const App = () => (
   {/* ✅ Public Routes */}
   <Route path="/" element={<Index />} />
   <Route path="/login" element={<Login />} />
+
   <Route path="/signup" element={<Register />} />
 
   {/* 🔒 Admin-Only Private Routes */}
@@ -128,6 +129,11 @@ const App = () => (
       </RoleBasedRoute>
     }
   />
+  <Route path="/settings" element={
+    <RoleBasedRoute allowedRoles={["admin"]}>
+      <SettingsPage />
+    </RoleBasedRoute>
+  } />
   <Route
     path="/secure"
     element={
