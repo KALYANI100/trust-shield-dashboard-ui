@@ -283,7 +283,7 @@ const CustomerDashboard = () => {
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent className="max-w-lg">
           <DialogHeader>
-            <DialogTitle className="text-blue-600">Blockchain Proof</DialogTitle>
+            <DialogTitle className="text-blue-600">Transaction Proof</DialogTitle>
             <DialogDescription>
               Verification details for transaction #{selectedTransactionId}
             </DialogDescription>
