@@ -1,73 +1,80 @@
-# Welcome to your Lovable project
+# 🛡️ Trust Shield Dashboard – Strengthening Retail Cybersecurity
 
-## Project info
+## Overview
 
-**URL**: https://lovable.dev/projects/d55df46c-7248-4109-8491-1f01cc332778
+With the rise in online transactions, e-commerce platforms like Walmart are increasingly vulnerable to threats such as fraud, data breaches, and identity theft. **Trust Shield Dashboard** is an AI-powered cybersecurity solution designed to enhance trust and transparency for both customers and administrators.
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## 🚀 Features
 
-**Use Lovable**
+### 🔓 Customer Dashboard
+- Password Strength Indicator  
+- Multi-Factor Authentication (MFA) – Google Authenticator  
+- Real-Time Login Alerts  
+- Security Score Display  
+- Multi-Session Management  
+- **Secure 3-Step Payment**  
+  - AI-Based Fraud Detection  
+  - End-to-End Encryption  
+  - Blockchain Verification  
+- AI-Verified Product Safety  
+- Transaction Dispute Portal  
+- Downloadable Proof of Transaction  
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/d55df46c-7248-4109-8491-1f01cc332778) and start prompting.
+### 🧠 Admin Dashboard
+- Live Threat Monitoring  
+- Attack Detection – Bot, brute force, SQL injection, DoS  
+- Auto-Mitigation & IP Blocking  
+- Zero Trust Session Control (Verified / Pending / Denied)  
+- Transaction Oversight – Approve, reject, investigate  
+- Payment Security – Geo-blocking, VPN blocking, Device Fingerprinting  
+- Region & Method-Based Restrictions  
+- System Settings:  
+  - Alert Thresholds  
+  - Email Alerts  
+  - Two-Factor Authentication  
+  - Daily Reports  
+  - Session Timeouts  
+  - Syslog Support  
+  - Data Retention Management  
 
-Changes made via Lovable will be committed automatically to this repo.
+---
 
-**Use your preferred IDE**
+## ✅ Key Benefits
+- Boosts customer confidence and platform transparency  
+- Enables proactive & AI-powered threat mitigation  
+- Reduces fraud and chargebacks  
+- Ensures secure, smooth retail operations  
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+---
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 🧰 Tech Stack
 
-Follow these steps:
+| Layer         | Technology                       |
+|---------------|----------------------------------|
+| Frontend      | React.js (MERN Stack)            |
+| Backend       | Node.js, Express.js, MongoDB     |
+| Authentication| Google Sign-In, Google Authenticator (MFA) |
+| AI Module     | Python, TensorFlow for Fraud Detection |
+| Blockchain    | For secure transaction validation |
+| Security      | JWT, Helmet.js, Rate Limiting, Device Fingerprinting |
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+---
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## 🔧 Getting Started
 
-# Step 3: Install the necessary dependencies.
-npm i
+### 📁 Clone the Repository
+```bash
+git clone https://github.com/KALYANI100/trust-shield-dashboard-ui.git
+cd trust-shield-dashboard-ui
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+
+cd Backend
+npm install
+node server.js
+
+
+cd ..
+npm install
 npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/d55df46c-7248-4109-8491-1f01cc332778) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
