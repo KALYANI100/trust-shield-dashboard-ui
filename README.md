@@ -78,3 +78,18 @@ node server.js
 cd ..
 npm install
 npm run dev
+```
+Create a .env file inside the Backend directory:
+JWT_SECRET=your_jwt_secret_key
+JWT_EXPIRES_IN=3d
+GOOGLE_CLIENT_ID=your_google_client_id
+RECAPTCHA_SECRET_KEY=your_recaptcha_secret_key
+MONGODB_URI=your_mongodb_connection_string
+PORT=5000
+
+In the Root Directory:-
+Create a .env file in the root of the project (same level as frontend package.json):
+
+VITE_RECAPTCHA_SITE_KEY=your_recaptcha_site_key
+VITE_SECRET_KEY=your_secret_key_if_needed
+VITE_GOOGLE_CLIENT_ID=your_google_client_id
